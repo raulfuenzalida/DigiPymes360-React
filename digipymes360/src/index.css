@@ -1,3 +1,19 @@
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -22,13 +38,6 @@ a:hover {
   color: #535bf2;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
 
 h1 {
   font-size: 3.2em;
@@ -66,3 +75,12 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.bg-dp360 {
+  background-color: rgb(236, 117, 61) !important; /* naranja corporativo */
+}
+
+.logo-dp360 {
+  height: 40px;
+}
+
