@@ -3,7 +3,7 @@ import logo from '../img/logo.png';
 
 export default function LoginForm() {
   return (
-    <main className="container d-flex justify-content-center align-items-start mt-5">
+    <main className="min-vh-100 d-flex justify-content-center align-items-center">
       <div className="col-12 col-sm-10 col-md-6 col-lg-4">
         <div className="p-4 border rounded bg-white shadow-sm">
           <div className="text-center mb-4">
