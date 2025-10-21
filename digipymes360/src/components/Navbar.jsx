@@ -26,13 +26,20 @@ export default function Navbar() {
 
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav me-auto">
-                            <li className="nav-item"><Link className="nav-link active" to="/">Inicio</Link></li>
-                            <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>
-                            <li className="nav-item"><Link className="nav-link" to="/registro">Registrarse</Link></li>
-                            <li className="nav-item"><Link className="nav-link" to="/nosotros">Sobre nosotros</Link></li>
-                            <li className="nav-item"><Link className="nav-link" to="/perfil">Mi Perfil</Link></li>
-                            <li className="nav-item"><Link className="nav-link" to="/compra">Compra</Link></li>
-                            <li className="nav-item"><Link className="nav-link" to="/soporte">Soporte</Link></li>
+                            <li className="nav-item"><NavLink to="/"
+                                    className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Inicio</NavLink></li>
+                            <li className="nav-item"><NavLink to="/login"
+                                    className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Login</NavLink></li>
+                            <li className="nav-item"><NavLink to="/registro"
+                                    className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Registrarse</NavLink></li>
+                            <li className="nav-item"><NavLink to="/nosotros" 
+                                    className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Sobre nosotros</NavLink></li>
+                            <li className="nav-item"><NavLink to="/perfil"
+                                    className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Mi Perfil</NavLink></li>
+                            <li className="nav-item"><NavLink to="/compra"
+                                    className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Compra</NavLink></li>
+                            <li className="nav-item"><NavLink to="/soporte"
+                                    className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Soporte</NavLink></li>
                         </ul>
                     </div>
                 </div>
