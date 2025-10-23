@@ -35,10 +35,10 @@ export default function Navbar() {
                             ) : (
                                 <>
                                     <li className="nav-item"><Link className="nav-link" to="/perfil">Mi Perfil</Link></li>
-                                    <li className="nav-item"><Link className="nav-link" to="/compra">Compra</Link></li>
                                     <li className="nav-item"><Link className="nav-link" to="/soporte">Soporte</Link></li>
                                 </>
                             )}
+                            <li className="nav-item"><Link className="nav-link" to="/compra">Compra</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/nosotros">Sobre nosotros</Link></li>
                         </ul>
                     </div>

@@ -21,38 +21,37 @@ export default function App() {
         <Route path="/" element={
           <CatalogContext.Provider value={contextValue}>
             <Inicio>
-              {(product) => (
+              {(product, handleAddToCart) => (
                 <div className="card shadow-sm h-100">
-                  <img src={pyme} className="card-img-top" alt="{product.nombre}" />
+                  <img src={pyme} className="card-img-top" alt={product.nombre} />
                   <div className="card-body text-center">
                     <h5 className="card-title">{product.nombre}</h5>
-                    <p className="card-text">Precio : ${product.precio} dólares</p>
-                    <p className="card-text">En Stock : ${product.stock}</p>
-                    <button className="btn btn-success mt-auto addCarrito">Añadir al carrito</button>
+                    <p className="card-text">Precio: ${product.precio} dólares</p>
+                    <p className="card-text">En Stock: {product.stock}</p>
+                    <button
+                      className="btn btn-success mt-auto addCarrito"
+                      onClick={() => handleAddToCart(product)}
+                    >
+                      Añadir al carrito
+                    </button>
                   </div>
                 </div>
               )}
             </Inicio>
+
           </CatalogContext.Provider>
         } />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/registro" element={<Registro />} />
         <Route path="/nosotros" element={<Nosotros />} />
-
+        
+        <Route path="/compra" element={<Compra />}/>
 
         <Route
           path="/perfil"
           element={
             <PrivateRoute>
               <Perfil />
-            </PrivateRoute>
-          }
-        />
-        <Route
-          path="/compra"
-          element={
-            <PrivateRoute>
-              <Compra />
             </PrivateRoute>
           }
         />
