@@ -1,49 +1,70 @@
 import logo from '../img/logo.png';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function Navbar() {
-    return (
-        <header style={{ width: "100%", margin: 0, padding: 0 }}>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dp360">
-                <div className="container-fluid">
-                    
-                    <Link className="navbar-brand" to="/">
-                        <img src={logo} alt="Logo" className="logo-dp360" style={{ height: '40px' }} />
-                    </Link>
-                    
-                    <button
-                        className="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarNav"
-                        aria-controls="navbarNav"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span className="navbar-toggler-icon"></span>
-                    </button>
-                    
+  const [open, setOpen] = useState(false);
 
-                    <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav me-auto">
-                            <li className="nav-item"><NavLink to="/"
-                                    className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Inicio</NavLink></li>
-                            <li className="nav-item"><NavLink to="/login"
-                                    className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Login</NavLink></li>
-                            <li className="nav-item"><NavLink to="/registro"
-                                    className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Registrarse</NavLink></li>
-                            <li className="nav-item"><NavLink to="/nosotros" 
-                                    className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Sobre nosotros</NavLink></li>
-                            <li className="nav-item"><NavLink to="/perfil"
-                                    className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Mi Perfil</NavLink></li>
-                            <li className="nav-item"><NavLink to="/compra"
-                                    className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Compra</NavLink></li>
-                            <li className="nav-item"><NavLink to="/soporte"
-                                    className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Soporte</NavLink></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
-    );
+  const toggleMenu = () => setOpen(o => !o);
+  const closeMenu = () => setOpen(false);
+
+  return (
+    <header style={{ width: "100%", margin: 0, padding: 0 }}>
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dp360">
+        <div className="container-fluid">
+
+          <Link className="navbar-brand" to="/" onClick={closeMenu}>
+            <img src={logo} alt="Logo" className="logo-dp360" style={{ height: '40px' }} />
+          </Link>
+
+
+          <button
+            className="navbar-toggler"
+            type="button"
+            aria-controls="navbarNav"
+            aria-expanded={open}
+            aria-label="Toggle navigation"
+            onClick={toggleMenu}
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+
+         
+          <div className={`collapse navbar-collapse ${open ? 'show' : ''}`} id="navbarNav">
+            <ul className="navbar-nav me-auto">
+              <li className="nav-item">
+                <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                  onClick={closeMenu}>Inicio</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to="/login" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                  onClick={closeMenu}>Login</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to="/registro" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                  onClick={closeMenu}>Registrarse</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to="/nosotros" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                  onClick={closeMenu}>Sobre nosotros</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to="/perfil" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                  onClick={closeMenu}>Mi Perfil</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to="/compra" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                  onClick={closeMenu}>Compra</NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to="/soporte" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                  onClick={closeMenu}>Soporte</NavLink>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </nav>
+    </header>
+  );
 }
