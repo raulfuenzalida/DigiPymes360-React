@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import img_pyme from "../img/img_pyme.jpg";
+
 export default function Compra() {
     const [carrito, setCarrito] = useState(null);
     const [total, setTotal] = useState(0);
@@ -12,30 +13,32 @@ export default function Compra() {
         setCarrito(saved);
     }, []);
 
+
     useEffect(() => {
         if (!carrito) return;
 
-        if (carrito.length === 0) {
-            
-            navigate("/");
-            return;
-        }
-
         let t = 0;
-        for (let i = 0; i < carrito.length; i++) {
-            const cantidad = Number(carrito[i].cantidadCarro || 1);
-            const precio = Number(carrito[i].precio || 0);
+        for (const item of carrito) {
+            const cantidad = Number(item.cantidadCarro || 1);
+            const precio = Number(item.precio || 0);
             t += cantidad * precio;
         }
         setTotal(t);
         localStorage.setItem("Carrito", JSON.stringify(carrito));
-    }, [carrito, navigate]);
+    }, [carrito]);
+
 
     const eliminarItem = (index) => {
         const copy = [...carrito];
         copy.splice(index, 1);
         setCarrito(copy);
+
+        if (copy.length === 0) {
+            localStorage.removeItem("Carrito");
+            setTimeout(() => navigate("/"), 400);
+        }
     };
+
 
     const handleCantidadChange = (index, value) => {
         const copy = [...carrito];
@@ -46,6 +49,7 @@ export default function Compra() {
         setCarrito(copy);
     };
 
+
     const pagar = () => {
         if (!carrito || carrito.length === 0) {
             alert("Carrito vacío");
@@ -55,7 +59,7 @@ export default function Compra() {
         alert(`Compra realizada con éxito por $${total.toFixed(2)} dólares.`);
         localStorage.removeItem("Carrito");
         setCarrito([]);
-        navigate("/");
+        setTimeout(() => navigate("/"), 400);
     };
 
 
@@ -68,6 +72,7 @@ export default function Compra() {
             </main>
         );
     }
+
 
     return (
         <main className="min-h-screen">
@@ -86,7 +91,7 @@ export default function Compra() {
                             <div className="col-12 col-md-6 col-lg-4 mb-3" key={`${item.id}-${i}`}>
                                 <div className="card h-100 shadow-sm">
                                     <img
-                                        src={img_pyme}//{item.img || "/img/img_pyme.jpg"}
+                                        src={img_pyme}
                                         className="card-img-top"
                                         alt={item.nombre}
                                         style={{ height: 160, objectFit: "cover" }}
