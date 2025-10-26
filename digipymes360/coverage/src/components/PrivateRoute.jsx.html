@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/components/Footer.jsx</title>
+    <title>Code coverage report for src/components/PrivateRoute.jsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/components</a> Footer.jsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/components</a> PrivateRoute.jsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -72,23 +72,29 @@
 <a name='L7'></a><a href='#L7'>7</a>
 <a name='L8'></a><a href='#L8'>8</a>
 <a name='L9'></a><a href='#L9'>9</a>
-<a name='L10'></a><a href='#L10'>10</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { Link } from 'react-router-dom';<span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span>
-<span class="cstat-no" title="statement not covered" >export default function Footer() {</span>
-<span class="cstat-no" title="statement not covered" >    return (</span>
-<span class="cstat-no" title="statement not covered" >        &lt;footer className="bg-dark text-white text-center p-3"&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;p className="mb-0"&gt;© 2025 DigiPymes360 | &lt;Link to="/" className="text-white text-decoration-underline"&gt;Contacto&lt;/Link&gt; | &lt;Link</span>
-<span class="cstat-no" title="statement not covered" >                to="/" className="text-white text-decoration-underline"&gt;Términos&lt;/Link&gt;&lt;/p&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;/footer&gt;</span>
-    )
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { Navigate } from 'react-router-dom';<span class="fstat-no" title="function not covered" ><span class="branch-0 cbranch-no" title="branch not covered" ></span></span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >export default function PrivateRoute({ children }) {</span>
+<span class="cstat-no" title="statement not covered" >  const logged = localStorage.getItem("Logged");</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (logged === null || logged.toLowerCase().includes("false")) {</span>
+<span class="cstat-no" title="statement not covered" >    return &lt;Navigate to="/login" replace /&gt;;</span>
+<span class="cstat-no" title="statement not covered" >  }</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return children;</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;</pre></td></tr></table></pre>
 
