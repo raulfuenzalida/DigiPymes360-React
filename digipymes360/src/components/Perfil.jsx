@@ -32,7 +32,7 @@ export default function Perfil() {
                 telefono: userData.telefono,
             });
 
-            const response = await fetch(`http://localhost:8080/api/v2/user/putAddressPhone?${params.toString()}`, {
+            const response = await fetch(`http://54.236.21.136:8080/api/v2/user/putAddressPhone?${params.toString()}`, {
                 method: "PUT",
             });
 

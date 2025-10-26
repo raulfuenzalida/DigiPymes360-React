@@ -26,7 +26,7 @@ export default function Soporte() {
   };
 
   const subirSoporte = async (nombre, correo, telefono, mensaje) => {
-    const url = `http://localhost:8080/api/v2/support/add?id_cliente=1`;
+    const url = `http://54.236.21.136:8080/api/v2/support/add?id_cliente=1`;
 
     const datos = {
       mensaje:
