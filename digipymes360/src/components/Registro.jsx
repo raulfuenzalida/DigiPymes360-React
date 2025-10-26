@@ -110,7 +110,7 @@ export default function Registro() {
 
     
     return (
-        <main className="min-vh-100 d-flex justify-content-center align-items-center bg-light">
+        <main className="min-vh-100 d-flex justify-content-center align-items-center">
             <div className="col-12 col-sm-10 col-md-6 col-lg-5">
                 <div className="p-4 border rounded bg-white shadow-sm">
                     <div className="text-center mb-4">
