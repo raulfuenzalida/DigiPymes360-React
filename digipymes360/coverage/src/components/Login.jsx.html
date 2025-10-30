@@ -423,7 +423,7 @@ export default function LoginForm() {
 &nbsp;
   const consultarApi = async () =&gt; {
     const params = new URLSearchParams({ email, password });
-    const url = `http://54.236.21.136:8080/api/v2/user/loginDP360?${params.toString()}`;
+    const url = `http://98.94.203.0:8080/api/v2/user/loginDP360?${params.toString()}`;
 &nbsp;
     try {
       const response = await fetch(url<span class="branch-0 cbranch-no" title="branch not covered" >);</span>
@@ -437,7 +437,7 @@ export default function LoginForm() {
 &nbsp;
   const consultarApiDatosUsuario = <span class="fstat-no" title="function not covered" >async () =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    const params = new URLSearchParams({ email, password });</span>
-<span class="cstat-no" title="statement not covered" >    const url = `http://54.236.21.136:8080/api/v2/user/loginINFO?${params.toString()}`;</span>
+<span class="cstat-no" title="statement not covered" >    const url = `http://98.94.203.0:8080/api/v2/user/loginINFO?${params.toString()}`;</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    try {</span>
 <span class="cstat-no" title="statement not covered" >      const response = await fetch(url);</span>

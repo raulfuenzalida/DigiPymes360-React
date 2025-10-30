@@ -19,7 +19,7 @@ export default function Registro() {
 
     const registrar = async () => {
         const params = new URLSearchParams({ direccion, telefono });
-        const url = `http://54.236.21.136:8080/api/v2/user/add?${params.toString()}`;
+        const url = `http://98.94.203.0:8080/api/v2/user/add?${params.toString()}`;
 
         const datos = {
             nombre: nombre,

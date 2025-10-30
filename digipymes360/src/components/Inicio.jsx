@@ -10,7 +10,7 @@ export default function Inicio({ children }) {
     const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
-        fetch("http://98.93.227.24:8082/api/v1/producto/precio?minimo=0&maximo=99999999999")
+        fetch("http://35.173.75.94:8082/api/v1/producto/precio?minimo=0&maximo=99999999999")
             .then((res) => res.json())
             .then((data) => {
                 setProducts(data);
