@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Toaster, toast } from 'sonner'
 
 export default function Compra() {
     const [carrito, setCarrito] = useState([]);
@@ -39,14 +40,15 @@ export default function Compra() {
     };
 
     const pagar = () => {
-        if (carrito.length === 0) return alert('Carrito vacío');
-        alert('Compra realizada: $' + total.toFixed(2));
+        if (carrito.length === 0) return toast.error('Carrito vacío');//alert('Carrito vacío');
+        toast.success('Compra realizada: $' + total.toFixed(2))//alert('Compra realizada: $' + total.toFixed(2));
         localStorage.removeItem('Carrito');
         setCarrito([]);
     };
 
     return (
         <main className="min-h-screen">
+            <Toaster position="top-center" richColors />
             <div className="container">
                 <div className="container" id="titulo">
                     <h1><strong>Carrito de Compras</strong></h1>
@@ -97,6 +99,7 @@ export default function Compra() {
                                 <p className="card-text fs-5">
                                     Total a pagar: $<span id="precioTotal" className="fw-bold text-success">{total.toFixed(2)}</span> Dólares
                                 </p>
+                                
                                 <button className="btn btn-success btn-lg mt-2 w-75 mx-auto" id="pagarBtn" onClick={pagar}>
                                     Pagar Ahora
                                 </button>

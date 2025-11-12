@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { toast,Toaster } from 'sonner';
 export default function Soporte() {
     const [form, setForm] = useState({
         nombreCompleto: "",
@@ -14,8 +15,8 @@ export default function Soporte() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        alert(
-            `Mensaje enviado:\n\nNombre: ${form.nombreCompleto}\nCorreo: ${form.correo}\nTeléfono: ${form.telefono}\nMensaje: ${form.mensaje}`
+        toast.success(
+            'Solicitud de soporte enviada con exito'
         );
     };
     return (
@@ -99,6 +100,7 @@ export default function Soporte() {
             </div>
 
             <div className="d-flex justify-content-center">
+              <Toaster position="top-center" richColors />
               <button type="submit" className="btn btn-success">
                 Enviar
               </button>
