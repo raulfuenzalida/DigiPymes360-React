@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Toaster, toast } from 'sonner'
+import { Toaster, toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
+import img_pyme from '../img/img_pyme.jpg'; 
 
 export default function Compra() {
     const [carrito, setCarrito] = useState(null);
@@ -22,6 +24,7 @@ export default function Compra() {
             const precio = Number(item.precio || 0);
             t += cantidad * precio;
         }
+
         setTotal(t);
         localStorage.setItem("Carrito", JSON.stringify(carrito));
     }, [carrito]);
@@ -42,16 +45,19 @@ export default function Compra() {
     const handleCantidadChange = (index, value) => {
         const copy = [...carrito];
         let v = parseInt(value, 10) || 1;
+
         if (v < 1) v = 1;
         if (v > copy[index].stock) v = copy[index].stock;
+
         copy[index].cantidadCarro = v;
         setCarrito(copy);
     };
 
 
     const pagar = () => {
-        if (carrito.length === 0) return toast.error('Carrito vacío');//alert('Carrito vacío');
-        toast.success('Compra realizada: $' + total.toFixed(2))//alert('Compra realizada: $' + total.toFixed(2));
+        if (carrito.length === 0) return toast.error('Carrito vacío');
+
+        toast.success('Compra realizada: $' + total.toFixed(2));
         localStorage.removeItem('Carrito');
         setCarrito([]);
         setTimeout(() => navigate("/"), 400);
@@ -68,10 +74,10 @@ export default function Compra() {
         );
     }
 
-
     return (
         <main className="min-h-screen">
             <Toaster position="top-center" richColors />
+
             <div className="container">
                 <div className="container" id="titulo">
                     <h1><strong>Carrito de Compras</strong></h1>
@@ -92,6 +98,7 @@ export default function Compra() {
                                         alt={item.nombre}
                                         style={{ height: 160, objectFit: "cover" }}
                                     />
+
                                     <div className="card-body d-flex flex-column text-center">
                                         <h5 className="card-title">{item.nombre}</h5>
                                         <p className="card-text">Precio: ${Number(item.precio).toFixed(2)} dólares</p>
@@ -124,22 +131,37 @@ export default function Compra() {
                     )}
                 </div>
 
+                {/* Resumen total */}
                 <div className="container my-4">
                     <div className="row justify-content-center">
                         <div className="col-12 col-sm-8 col-md-6">
-                            <div className="card text-center shadow-lg border-0 rounded-4 p-3" style={{ background: '#f8f9fa' }}>
-                                <h5 className="card-title mb-2" style={{ color: '#343a40' }}>Resumen de compra</h5>
+                            <div
+                                className="card text-center shadow-lg border-0 rounded-4 p-3"
+                                style={{ background: '#f8f9fa' }}
+                            >
+                                <h5 className="card-title mb-2" style={{ color: '#343a40' }}>
+                                    Resumen de compra
+                                </h5>
+
                                 <p className="card-text fs-5">
-                                    Total a pagar: $<span id="precioTotal" className="fw-bold text-success">{total.toFixed(2)}</span> Dólares
+                                    Total a pagar: $
+                                    <span id="precioTotal" className="fw-bold text-success">
+                                        {total.toFixed(2)}
+                                    </span> Dólares
                                 </p>
-                                
-                                <button className="btn btn-success btn-lg mt-2 w-75 mx-auto" id="pagarBtn" onClick={pagar}>
+
+                                <button
+                                    className="btn btn-success btn-lg mt-2 w-75 mx-auto"
+                                    id="pagarBtn"
+                                    onClick={pagar}
+                                >
                                     Pagar Ahora
                                 </button>
                             </div>
                         </div>
                     </div>
-                )}
+                </div>
+
             </div>
         </main>
     );
