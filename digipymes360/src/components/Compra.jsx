@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
-import { Toaster, toast } from 'sonner'
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import img_pyme from "../img/img_pyme.jpg";
 
 export default function Compra() {
     const [carrito, setCarrito] = useState(null);
@@ -50,9 +51,13 @@ export default function Compra() {
 
 
     const pagar = () => {
-        if (carrito.length === 0) return toast.error('Carrito vacío');//alert('Carrito vacío');
-        toast.success('Compra realizada: $' + total.toFixed(2))//alert('Compra realizada: $' + total.toFixed(2));
-        localStorage.removeItem('Carrito');
+        if (!carrito || carrito.length === 0) {
+            alert("Carrito vacío");
+            return;
+        }
+
+        alert(`Compra realizada con éxito por $${total.toFixed(2)} dólares.`);
+        localStorage.removeItem("Carrito");
         setCarrito([]);
         setTimeout(() => navigate("/"), 400);
     };
@@ -71,7 +76,6 @@ export default function Compra() {
 
     return (
         <main className="min-h-screen">
-            <Toaster position="top-center" richColors />
             <div className="container">
                 <div className="container" id="titulo">
                     <h1><strong>Carrito de Compras</strong></h1>
@@ -124,18 +128,25 @@ export default function Compra() {
                     )}
                 </div>
 
-                <div className="container my-4">
-                    <div className="row justify-content-center">
-                        <div className="col-12 col-sm-8 col-md-6">
-                            <div className="card text-center shadow-lg border-0 rounded-4 p-3" style={{ background: '#f8f9fa' }}>
-                                <h5 className="card-title mb-2" style={{ color: '#343a40' }}>Resumen de compra</h5>
-                                <p className="card-text fs-5">
-                                    Total a pagar: $<span id="precioTotal" className="fw-bold text-success">{total.toFixed(2)}</span> Dólares
-                                </p>
-                                
-                                <button className="btn btn-success btn-lg mt-2 w-75 mx-auto" id="pagarBtn" onClick={pagar}>
-                                    Pagar Ahora
-                                </button>
+                {carrito.length > 0 && (
+                    <div className="container my-4">
+                        <div className="row justify-content-center">
+                            <div className="col-12 col-sm-8 col-md-6">
+                                <div className="card text-center shadow-lg border-0 rounded-4 p-3" style={{ background: "#f8f9fa" }}>
+                                    <h5 className="card-title mb-2" style={{ color: "#343a40" }}>
+                                        Resumen de compra
+                                    </h5>
+                                    <p className="card-text fs-5">
+                                        Total a pagar: $
+                                        <span className="fw-bold text-success">{total.toFixed(2)}</span> Dólares
+                                    </p>
+                                    <button
+                                        className="btn btn-success btn-lg mt-2 w-75 mx-auto"
+                                        onClick={pagar}
+                                    >
+                                        Pagar Ahora
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
