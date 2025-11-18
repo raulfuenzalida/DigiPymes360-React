@@ -20,7 +20,7 @@ export default function Registro() {
 
     const consultarApiDatosUsuario = async () => {
         const params = new URLSearchParams({ email, password: pass });
-        const url = `http://35.173.75.94:8080/api/v2/user/loginINFO?${params.toString()}`;
+        const url = `http://98.94.203.0:8080/api/v2/user/loginINFO?${params.toString()}`;
 
         try {
         const response = await fetch(url);
@@ -34,7 +34,7 @@ export default function Registro() {
 
     const registrar = async () => {
         const params = new URLSearchParams({ direccion, telefono });
-        const url = `http://35.173.75.94:8080/api/v2/user/add?${params.toString()}`;
+        const url = `http://98.94.203.0:8080/api/v2/user/add?${params.toString()}`;
 
         const datos = {
             nombre: nombre,
