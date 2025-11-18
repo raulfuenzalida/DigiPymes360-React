@@ -1,5 +1,6 @@
-import { useState } from "react";
-
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { toast,Toaster } from 'sonner';
 export default function Soporte() {
   const [form, setForm] = useState({
     nombreCompleto: "",
@@ -28,11 +29,11 @@ export default function Soporte() {
   const subirSoporte = async (nombre, correo, telefono, mensaje) => {
     const url = `http://98.94.203.0:8080/api/v2/support/add?id_cliente=1`;
 
-    const datos = {
-      mensaje:
-        `Correo: ${correo}\r\nTeléfono: ${telefono}\r\nNombre: ${nombre}\r\nMensaje: ${mensaje}`,
-      estado: "No resuelto",
-      fecha: new Date().toISOString(),
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        toast.success(
+            'Solicitud de soporte enviada con exito'
+        );
     };
 
     try {
@@ -159,6 +160,7 @@ export default function Soporte() {
             </div>
 
             <div className="d-flex justify-content-center">
+              <Toaster position="top-center" richColors />
               <button type="submit" className="btn btn-success">
                 Enviar
               </button>
