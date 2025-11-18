@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import gato_naranja from "../img/gato_naranja.jpg";
+import { Toaster,toast } from "sonner";
 
 export default function Perfil() {
     const [userData, setUserData] = useState(null);
@@ -32,7 +33,7 @@ export default function Perfil() {
                 telefono: userData.telefono,
             });
 
-            const response = await fetch(`http://98.94.203.0:8080/api/v2/user/putAddressPhone?${params.toString()}`, {
+            const response = await fetch(`http://35.173.75.94:8080/api/v2/user/putAddressPhone?${params.toString()}`, {
                 method: "PUT",
             });
 
@@ -43,10 +44,10 @@ export default function Perfil() {
 
             const data = await response.json();
             console.log("Actualización exitosa:", data);
-            alert("Datos actualizados correctamente.");
+            toast.success("Datos actualizados correctamente.");
         } catch (error) {
             console.error("Error en actualización:", error);
-            alert("Error al actualizar: " + error.message);
+            toast.error("Error al actualizar: " + error.message);
         }
     };
 
@@ -56,6 +57,7 @@ export default function Perfil() {
 
     return (
         <main className="min-h-screen">
+            <Toaster position="top-center" richColors />
             <form className="perfilUsuario" onSubmit={(e) => e.preventDefault()}>
                 <div className="mt-4 text-center">
                     <h3><strong>Perfil de {userData.nombre}</strong></h3>

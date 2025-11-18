@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import logo from "../img/logo.png";
-
+import { Toaster,toast } from "sonner";
 
 const validarCorreo = (correo) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo);
 const validarNumero = (num) => /^[0-9]{9,}$/.test(num);
@@ -16,10 +16,25 @@ export default function Registro() {
     const [direccion, setDireccion] = useState("");
     const [telefono, setTelefono] = useState("");
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+
+    const consultarApiDatosUsuario = async () => {
+        const params = new URLSearchParams({ email, password: pass });
+        const url = `http://35.173.75.94:8080/api/v2/user/loginINFO?${params.toString()}`;
+
+        try {
+        const response = await fetch(url);
+        if (!response.ok) return false;
+        return await response.json();
+        } catch (error) {
+        console.error("Error en fetch:", error);
+        return false;
+        }
+    };
 
     const registrar = async () => {
         const params = new URLSearchParams({ direccion, telefono });
-        const url = `http://98.94.203.0:8080/api/v2/user/add?${params.toString()}`;
+        const url = `http://35.173.75.94:8080/api/v2/user/add?${params.toString()}`;
 
         const datos = {
             nombre: nombre,
@@ -47,37 +62,37 @@ export default function Registro() {
         setLoading(true);
 
         if (nombre.trim().length === 0) {
-            alert("Debes ingresar un nombre de al menos una letra.");
+            toast.error("Debes ingresar un nombre de al menos una letra.");
             setLoading(false);
             return;
         }
 
         if (!validarCorreo(email)) {
-            alert("El correo no es válido.");
+            toast.error("El correo no es válido.");
             setLoading(false);
             return;
         }
 
         if (pass.length < 8) {
-            alert("La contraseña debe tener al menos 8 caracteres.");
+            toast.error("La contraseña debe tener al menos 8 caracteres.");
             setLoading(false);
             return;
         }
 
         if (pass !== pass2) {
-            alert("Las contraseñas no coinciden.");
+            toast.error("Las contraseñas no coinciden.");
             setLoading(false);
             return;
         }
 
         if (direccion.trim().length < 10) {
-            alert("Debes ingresar una dirección de al menos 10 letras.");
+            toast.error("Debes ingresar una dirección de al menos 10 letras.");
             setLoading(false);
             return;
         }
 
         if (!validarNumero(telefono)) {
-            alert("Debes ingresar un teléfono válido (al menos 9 dígitos).");
+            toast.error("Debes ingresar un teléfono válido (al menos 9 dígitos).");
             setLoading(false);
             return;
         }
@@ -86,11 +101,28 @@ export default function Registro() {
         const v = await registrar();
 
         if (!v) {
-            alert("Error en la petición.");
+            toast.error("Error en la petición.");
         } else if (!v.ok) {
-            alert("Ya existe esta cuenta.");
+            toast.warning("Ya existe esta cuenta.");
         } else {
-            alert("¡Te has registrado exitosamente!");
+            toast.success("¡Te has registrado exitosamente!");
+
+            const u = await consultarApiDatosUsuario();
+            console.log("Respuesta loginINFO:", u);
+
+            if (u && typeof u === "object" && u.id_usuario) {
+                localStorage.setItem("UserData", JSON.stringify(u));
+                console.log("Datos guardados en localStorage:", u);
+                localStorage.setItem("Logged", "true");
+
+            } else {
+                console.error("No se pudieron obtener datos válidos del usuario:", u);
+                toast.error("Error al obtener los datos del usuario.");
+                setLoading(false);
+                return;
+            }
+
+
             limpiarCampos();
             navigate("/perfil");
         }
@@ -112,6 +144,7 @@ export default function Registro() {
     
     return (
         <main className="min-vh-100 d-flex justify-content-center align-items-center">
+            <Toaster position="top-center" richColors />
             <div className="col-12 col-sm-10 col-md-6 col-lg-5">
                 <div className="p-4 border rounded bg-white shadow-sm">
                     <div className="text-center mb-4">

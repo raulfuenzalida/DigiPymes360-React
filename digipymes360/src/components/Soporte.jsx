@@ -27,7 +27,7 @@ export default function Soporte() {
   };
 
   const subirSoporte = async (nombre, correo, telefono, mensaje) => {
-    const url = `http://98.94.203.0:8080/api/v2/support/add?id_cliente=1`;
+    const url = `http://35.173.75.94:8080/api/v2/support/add?id_cliente=1`;
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -56,38 +56,39 @@ export default function Soporte() {
 
     // Validaciones
     if (nombreCompleto.length < 1) {
-      alert("Debes ingresar un nombre de al menos 1 caracter");
+      toast.error("Debes ingresar un nombre de al menos 1 caracter");
       return;
     }
     if (!validarCorreo(correo)) {
-      alert("El correo no es válido");
+      toast.error("El correo no es válido");
       return;
     }
     if (!validarNumero(telefono)) {
-      alert("Debes ingresar un teléfono de al menos 8 dígitos.");
+      toast.error("Debes ingresar un teléfono de al menos 8 dígitos.");
       return;
     }
     if (mensaje.length < 10) {
-      alert("Debes ingresar un mensaje de al menos 10 carácteres.");
+      toast.error("Debes ingresar un mensaje de al menos 10 carácteres.");
       return;
     }
 
     const respuesta = await subirSoporte(nombreCompleto, correo, telefono, mensaje);
 
     if (!respuesta) {
-      alert("Error en la petición de SOPORTE.");
+      toast.error("Error en la petición de SOPORTE.");
     } else if (!respuesta.ok) {
-      alert("No se pudo procesar tu solicitud.");
+      toast.error("No se pudo procesar tu solicitud.");
       limpiar();
     } else {
       limpiar();
-      alert("¡Gracias por escribir un soporte, esperamos solucionar pronto tu problema!");
+      toast.success("¡Gracias por escribir un soporte, esperamos solucionar pronto tu problema!");
       window.location.href = "/";
     }
   };
 
   return (
     <main className="container my-4" style={{ minHeight: "100vh" }}>
+      <Toaster position="top-center" richColors />
       <div className="row justify-content-center">
         <div className="registroUsuario col-md-8 col-lg-6">
           <h3 className="mt-3 text-center">

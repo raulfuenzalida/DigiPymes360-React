@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import logo from "../img/logo.png";
 import loadingGif from "../img/loading.gif";
+import { toast,Toaster } from 'sonner';
 
 const validarCorreo = (correo) => {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo);
@@ -20,7 +21,7 @@ export default function LoginForm() {
 
   const consultarApi = async () => {
     const params = new URLSearchParams({ email, password });
-    const url = `http://98.94.203.0:8080/api/v2/user/loginDP360?${params.toString()}`;
+    const url = `http://35.173.75.94:8080/api/v2/user/loginDP360?${params.toString()}`;
 
     try {
       const response = await fetch(url);
@@ -34,7 +35,7 @@ export default function LoginForm() {
 
   const consultarApiDatosUsuario = async () => {
     const params = new URLSearchParams({ email, password });
-    const url = `http://98.94.203.0:8080/api/v2/user/loginINFO?${params.toString()}`;
+    const url = `http://35.173.75.94:8080/api/v2/user/loginINFO?${params.toString()}`;
 
     try {
       const response = await fetch(url);
@@ -53,7 +54,7 @@ export default function LoginForm() {
     setLoading(true);
 
     if (!validarCorreo(email)) {
-      alert("El correo no es válido");
+      toast.error("El correo no es válido");
       setLoading(false);
       return;
     }
@@ -65,13 +66,13 @@ export default function LoginForm() {
     console.log("Respuesta loginDP360:", v);
 
     if (v === false) {
-      alert("Credenciales no válidas");
+      toast.error("Credenciales no válidas");
       localStorage.setItem("Logged", "false");
       setLoading(false);
       return;
     }
 
-    alert("Has iniciado sesión correctamente");
+    toast.success("Has iniciado sesión correctamente");
     localStorage.setItem("Logged", "true");
 
     const u = await consultarApiDatosUsuario();
@@ -82,7 +83,7 @@ export default function LoginForm() {
       console.log("Datos guardados en localStorage:", u);
     } else {
       console.error("No se pudieron obtener datos válidos del usuario:", u);
-      alert("Error: no se pudieron obtener los datos del usuario.");
+      toast.error("Error: no se pudieron obtener los datos del usuario.");
     }
 
     setLoading(false);
@@ -92,6 +93,7 @@ export default function LoginForm() {
 
   return (
     <main className="min-vh-100 d-flex justify-content-center align-items-center">
+      <Toaster position="top-center" richColors />
       <div className="col-12 col-sm-10 col-md-6 col-lg-4">
         <div className="p-4 border rounded bg-white shadow-sm">
           <div className="text-center mb-4">

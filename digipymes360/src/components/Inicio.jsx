@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import load_img from "../img/loading.gif";
+import { Toaster,toast } from "sonner";
 
 export const CatalogContext = createContext();
 
@@ -55,16 +56,19 @@ export default function Inicio({ children }) {
         if (index === -1) {
             carrito.push(compra);
             localStorage.setItem("Carrito", JSON.stringify(carrito));
+            toast.success(mensaje);
         } else {
             mensaje = "Este producto ya está en el carrito.";
+            toast.warning(mensaje);
         }
 
-        alert(mensaje);
+        
     };
 
     return (
         <CatalogContext.Provider value={{ products, loading, handleAddToCart }}>
             <main className="min-h-screen">
+                <Toaster position="top-center" richColors />
                 <div className="container text-center mt-4 d-flex flex-column align-items-center" id="titulo">
                     <h1><strong>Bienvenido a DigiPymes360</strong></h1>
                     <h3>La vitrina digital para pequeñas y medianas empresas</h3>
