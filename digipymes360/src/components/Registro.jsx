@@ -92,6 +92,7 @@ export default function Registro() {
         } else {
             alert("¡Te has registrado exitosamente!");
             limpiarCampos();
+            navigate("/perfil");
         }
 
         await delay(200);
