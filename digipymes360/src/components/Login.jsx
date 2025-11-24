@@ -21,7 +21,7 @@ export default function LoginForm() {
 
   const consultarApi = async () => {
     const params = new URLSearchParams({ email, password });
-    const url = `http://98.94.203.0:8080/api/v2/user/loginDP360?${params.toString()}`;
+    const url = `http://52.22.92.97:8080/api/v2/user/loginDP360?${params.toString()}`;
 
     try {
       const response = await fetch(url);
@@ -35,7 +35,7 @@ export default function LoginForm() {
 
   const consultarApiDatosUsuario = async () => {
     const params = new URLSearchParams({ email, password });
-    const url = `http://98.94.203.0:8080/api/v2/user/loginINFO?${params.toString()}`;
+    const url = `http://52.22.92.97:8080/api/v2/user/loginINFO?${params.toString()}`;
 
     try {
       const response = await fetch(url);

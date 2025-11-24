@@ -27,7 +27,7 @@ export default function Soporte() {
   };
 
   const subirSoporte = async (nombre, correo, telefono, mensaje) => {
-    const url = `http://98.94.203.0:8080/api/v2/support/add?id_cliente=1`;
+    const url = `http://52.22.92.97:8080/api/v2/support/add?id_cliente=1`;
 
     const handleSubmit = (e) => {
         e.preventDefault();
